@@ -1,0 +1,4 @@
+ Kuberhealthy lets you continuously verify that your applications and Kubernetes clusters are working as expected. By creating a custom resource (a KuberhealthyCheck) in your cluster, you can easily enable various synthetic tests and get Prometheus metrics for them.
+Kuberhealthy comes with lots of useful checks already available to ensure the core functionality of Kubernetes, but checks can be used to test anything you like. We encourage you to write your own check container in any language to test your own applications. It really is quick and easy!
+Kuberhealthy serves the status of all checks on a simple JSON status page, a Prometheus metrics endpoint (at /metrics), and supports InfluxDB metric forwarding for integration into your choice of alerting solution.
+ 
