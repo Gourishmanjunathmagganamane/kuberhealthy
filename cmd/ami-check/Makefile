@@ -1,5 +1,5 @@
-include ../../Makefile.common.mk
+include ../../Makefile
 
 BUILDER := "dockerx-ami-check"
 IMAGE := "kuberhealthy/ami-check"
-TAG := "v1.4.0"
+TAG := "v1.4.1"

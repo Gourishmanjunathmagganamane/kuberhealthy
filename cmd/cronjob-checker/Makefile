@@ -1,5 +1,5 @@
-include ../../Makefile.common.mk
+include ../../Makefile
 
 BUILDER := "dockerx-cronjob-checker"
 IMAGE := "kuberhealthy/cronjob-checker"
-TAG := "v2.1.0"
+TAG := "v2.1.1"

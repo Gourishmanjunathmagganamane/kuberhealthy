@@ -1,5 +1,5 @@
-include ../../Makefile.common.mk
+include ../../Makefile
 
 BUILDER := "dockerx-http-check"
 IMAGE := "kuberhealthy/http-check"
-TAG := "v1.5.0"
+TAG := "v1.5.1"

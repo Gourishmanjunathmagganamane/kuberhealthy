@@ -11,6 +11,7 @@
 - [James Rawlings](https://github.com/rawlingsj)
 - [Jonathan Phan](https://github.com/jonnydawg) - maintainer
 - [Joshulyne Park](https://github.com/joshulyne) - maintainer
+- [jsvk](https://github.com/jsvk)
 - [Justin Downie](https://github.com/jdowni000)
 - [Mario Constanti](https://github.com/bavarianbidi)
 - [Michael Kurashima](mailto:Michael.Kurashima@comcast.com)
@@ -24,3 +25,9 @@
 - [Engin Diri](https://twitter.com/_ediri)
 - [Joel Kulesa](https://github.com/jkulesa)
 - [McKenna Jones](https://github.com/mckennajones)
+- [Allan Ramirez](https://github.com/ramirezag)
+- [Erich Stoekl](https://github.com/erichstoekl)
+- [Stefan Tertan](https://github.com/ColdFire87)
+- [Ajay Kalambur](https://github.com/kalamburajay)
+- [Lorenzo Setale](https://setale.me/)
+- [Rachel Sheikh](https://github.com/sheikhrachel)

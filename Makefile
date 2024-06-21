@@ -1,5 +1,10 @@
+# This Makefile is imported from each check binary to make the management of all the different Dockerfiles easier.
+
+IMAGE ?= kuberhealthy
+TAG ?= unstable
+
 build:
-	docker build --no-cache --pull -t ${IMAGE}:${TAG} -f Dockerfile ../../
+	docker build -f Dockerfile --progress=plain -t ${IMAGE}:${TAG} ../..
 
 push:
 	# Remove dangling builder instance that can show up when a build fails

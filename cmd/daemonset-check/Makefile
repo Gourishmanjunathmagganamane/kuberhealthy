@@ -1,5 +1,5 @@
-include ../../Makefile.common.mk
+include ../../Makefile
 
 BUILDER := "dockerx-daemonset-check"
 IMAGE := "kuberhealthy/daemonset-check"
-TAG := "v3.3.0"
+TAG := "v3.3.1"

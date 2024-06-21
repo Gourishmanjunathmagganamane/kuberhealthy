@@ -13024,7 +13024,7 @@ status:
   storedVersions: []
 ---
 # Source: kuberhealthy/templates/poddisruptionbudget.yaml
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name:  kuberhealthy-pdb
@@ -13055,6 +13055,7 @@ data:
     maxCheckPodAge: 72h
     maxCompletedPodCount: 4
     maxErrorPodCount: 4
+    stateMetadata:
 ---
 # Source: kuberhealthy/templates/khcheck-daemonset.yaml
 apiVersion: v1
@@ -13083,6 +13084,19 @@ kind: ServiceAccount
 metadata:
   name: kuberhealthy
   namespace: kuberhealthy
+---
+# Source: kuberhealthy/templates/clusterrole.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: ClusterRole
+metadata:
+  name: kuberhealthy-daemonset-khcheck
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  verbs:
+  - list
 ---
 # Source: kuberhealthy/templates/clusterrole.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -13153,19 +13167,6 @@ rules:
     - pods/eviction
     verbs:
     - create
----
-# Source: kuberhealthy/templates/clusterrole.yaml
-apiVersion: "rbac.authorization.k8s.io/v1"
-kind: ClusterRole
-metadata:
-  name: kuberhealthy-daemonset-khcheck
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - nodes
-  verbs:
-  - list
 ---
 # Source: kuberhealthy/templates/khcheck-dns-internal.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -13376,7 +13377,7 @@ spec:
                   - kuberhealthy
               topologyKey: "kubernetes.io/hostname"
       containers:
-      - image: "docker.io/kuberhealthy/kuberhealthy:v2.7.1"
+      - image: "docker.io/kuberhealthy/kuberhealthy:v2.8.0-rc2"
         command: [/app/kuberhealthy]
         ports:
         - containerPort: 8080
@@ -13409,7 +13410,9 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
           - name: CHECK_REAPER_RUN_INTERVAL
-            value: 30s
+            value: "30s"
+          - name: TARGET_NAMESPACE
+            value: ""
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 2
@@ -13533,7 +13536,7 @@ spec:
           readOnlyRootFilesystem: true
     serviceAccountName: dns-internal-sa
 ---
-# Source: kuberhealthy/templates/prometheusrule.yml
+# Source: kuberhealthy/templates/prometheusrule.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -13551,14 +13554,12 @@ spec:
           expr: kuberhealthy_running < 1
           for: 5m
           labels:
-            severity: critical
           annotations:
             description: Kuberhealthy is not healthy
         - alert: ClusterUnhealthy
           expr: kuberhealthy_cluster_state < 1
           for: 5m
           labels:
-            severity: critical
           annotations:
             description: Kuberhealthy shows that the cluster is not healthy
 ---
